@@ -47,3 +47,6 @@ _deps
 # Clion
 .idea/
 /cmake-build-debug/
+
+# Dependencies
+/libtorch/
