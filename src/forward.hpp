@@ -15,3 +15,8 @@ auto forward(double* data, int size) -> at::Tensor {
   torch::NoGradGuard no_grad;
   return model.forward(inputs).toTensor()[0];
 }
+
+extern "C" auto forward_argmax(double* data, int size, uint8_t* out) -> void {
+  auto res = forward(data, size).argmax(0).to(torch::kU8);
+  memcpy(out, res.data_ptr(), size);
+}
