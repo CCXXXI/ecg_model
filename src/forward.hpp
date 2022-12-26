@@ -1,6 +1,6 @@
-#include "forward.h"
+#include <torch/script.h>
 
-static auto load_model() -> torch::jit::script::Module {
+auto load_model() -> torch::jit::script::Module {
   auto model = torch::jit::load("resources/model.pt");
   model.eval();
   return model;

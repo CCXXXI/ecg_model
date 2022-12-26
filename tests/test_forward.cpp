@@ -1,6 +1,6 @@
 #include <catch2/catch_test_macros.hpp>
 
-#include "../src/forward.h"
+#include "../src/forward.hpp"
 
 template <typename T>
 std::vector<T> load_txt(const std::string& path) {
