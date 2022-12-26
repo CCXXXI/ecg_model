@@ -12,7 +12,8 @@ std::vector<T> load_txt(const std::string& path) {
 
 static constexpr int n = 144000;
 static constexpr int m = 4;
-TEST_CASE("test", "[ecg_model]") {
+
+TEST_CASE("test_forward", "[ecg_model]") {
   auto input = load_txt<double>("resources/input.txt");
   REQUIRE(input.size() == n);
 
