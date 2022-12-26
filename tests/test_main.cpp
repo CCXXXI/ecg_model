@@ -1,6 +1,15 @@
 #include <catch2/catch_test_macros.hpp>
 
-TEST_CASE("Foo", "[bar]") {
-  REQUIRE(1 + 1 == 2);
-  REQUIRE(2 + 2 == 4);
+#include "../src/main.h"
+
+std::vector<double> load_input() {
+  std::vector<double> buffer;
+  std::ifstream file("resources/input.txt");
+  for (double d; file >> d;) buffer.push_back(d);
+  return buffer;
+}
+
+TEST_CASE("load_input", "[ecg_model]") {
+  auto input = load_input();
+  REQUIRE(input.size() == 144000);
 }
