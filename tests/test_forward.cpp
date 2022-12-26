@@ -10,16 +10,18 @@ std::vector<T> load_txt(const std::string& path) {
   return buffer;
 }
 
+static constexpr int n = 144000;
+static constexpr int m = 4;
 TEST_CASE("test", "[ecg_model]") {
   auto input = load_txt<double>("resources/input.txt");
-  REQUIRE(input.size() == 144000);
+  REQUIRE(input.size() == n);
 
-  auto direct_output = forward(input.data(), 144000);
-  REQUIRE(direct_output.sizes() == std::vector<int64_t>{4, 144000});
+  auto direct_output = forward(input.data(), n);
+  REQUIRE(direct_output.sizes() == std::vector<int64_t>{m, n});
 
   auto expected_direct_output_raw =
       load_txt<double>("resources/direct_output.txt");
   auto expected_direct_output = torch::from_blob(
-      expected_direct_output_raw.data(), {4, 144000}, torch::kDouble);
+      expected_direct_output_raw.data(), {m, n}, torch::kDouble);
   REQUIRE(direct_output.allclose(expected_direct_output));
 }
