@@ -14,15 +14,12 @@ TEST_CASE("test", "[ecg_model]") {
   auto input = load_txt<double>("resources/input.txt");
   REQUIRE(input.size() == 144000);
 
-  auto direct_output = forward(input.data(), input.size());
+  auto direct_output = forward(input.data(), 144000);
   REQUIRE(direct_output.sizes() == std::vector<int64_t>{4, 144000});
 
   auto expected_direct_output_raw =
       load_txt<double>("resources/direct_output.txt");
-  auto expected_direct_output =
-      torch::from_blob(expected_direct_output_raw.data(), {4, 144000})
-          .toType(torch::kDouble);
-  std::cout << direct_output.slice(1, 0, 100) << std::endl;
-  std::cout << expected_direct_output.slice(1, 0, 100) << std::endl;
+  auto expected_direct_output = torch::from_blob(
+      expected_direct_output_raw.data(), {4, 144000}, torch::kDouble);
   REQUIRE(direct_output.allclose(expected_direct_output));
 }
