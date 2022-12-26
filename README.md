@@ -13,3 +13,7 @@ rm libtorch-cxx11-abi-shared-with-deps-1.13.1+cpu.zip
 ```
 
 也可以换成 [这里](https://pytorch.org/get-started/locally/) 的其他版本。
+
+### 其他
+
+由 [vcpkg](https://github.com/microsoft/vcpkg) 管理。
