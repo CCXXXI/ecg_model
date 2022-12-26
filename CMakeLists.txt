@@ -9,7 +9,7 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -fsanitize=undefined")
 endif ()
 
-add_executable(ecg_model src/main.h src/main.cpp tests/test_main.cpp)
+add_executable(ecg_model src/forward.h src/forward.cpp tests/test_forward.cpp)
 
 set(Torch_DIR "./libtorch/share/cmake/Torch")
 find_package(Torch REQUIRED)

@@ -1,4 +1,4 @@
-#include "main.h"
+#include "forward.h"
 
 static auto load_model() -> torch::jit::script::Module {
   auto model = torch::jit::load("resources/model.pt");
