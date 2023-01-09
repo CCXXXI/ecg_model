@@ -3,7 +3,7 @@
 #include "../src/forward.hpp"
 
 template <typename T>
-std::vector<T> load_txt(const std::string& path) {
+auto load_txt(const std::string& path) -> std::vector<T> {
   std::vector<T> buffer;
   std::ifstream file(path);
   for (T d; file >> d;) buffer.push_back(d);
