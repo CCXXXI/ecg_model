@@ -11,7 +11,7 @@ endif ()
 
 add_executable(ecg_model_tests tests/test_forward.cpp)
 
-add_library(ecg_model STATIC src/forward.hpp)
+add_library(ecg_model SHARED src/forward.hpp)
 set_target_properties(ecg_model PROPERTIES LINKER_LANGUAGE CXX)
 
 set(Torch_DIR "./libtorch/share/cmake/Torch")
