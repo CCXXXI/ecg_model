@@ -14,6 +14,8 @@ static constexpr int n = 144000;
 static constexpr int m = 4;
 
 TEST_CASE("test_forward", "[ecg_model]") {
+  load_model("resources/model.pt");
+
   auto input = load_txt<double>("resources/input.txt");
   REQUIRE(input.size() == n);
 

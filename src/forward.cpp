@@ -1,14 +1,13 @@
 #include <torch/script.h>
 
-auto load_model() -> torch::jit::script::Module {
-  auto model = torch::jit::load("resources/model.pt");
+torch::jit::Module model;
+
+extern "C" auto load_model(const char* path) -> void {
+  model = torch::jit::load(path);
   model.eval();
-  return model;
 }
 
 auto forward(double* data, int size) -> at::Tensor {
-  static auto model = load_model();
-
   std::vector<torch::jit::IValue> inputs;
   inputs.emplace_back(torch::from_blob(data, {1, 1, size}, torch::kDouble));
 
