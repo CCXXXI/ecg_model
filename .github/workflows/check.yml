@@ -1,0 +1,26 @@
+name: check
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      - uses: actions/cache@v3
+        with:
+          path: /home/runner/.cache/vcpkg/archives
+          key: vcpkg-${{ hashFiles('vcpkg.json') }}
+      - uses: aminya/setup-cpp@v1
+        with:
+          compiler: gcc
+          cmake: true
+      - run: wget https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.13.1%2Bcpu.zip
+      - run: unzip libtorch-cxx11-abi-shared-with-deps-1.13.1+cpu.zip
+      - run: cmake -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake .
+      - run: cmake --build .
+      - run: ./ecg_model_tests

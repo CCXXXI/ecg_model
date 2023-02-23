@@ -8,6 +8,7 @@
     <libraryRoots>
       <file path="$PROJECT_DIR$/libtorch" />
       <file path="$PROJECT_DIR$/vcpkg" />
+      <file path="$PROJECT_DIR$/vcpkg_installed" />
     </libraryRoots>
   </component>
 </project>
