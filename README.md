@@ -9,3 +9,5 @@
 [![check](https://github.com/ccxxxi/ecg_model_cpp/actions/workflows/check.yml/badge.svg)](https://github.com/ccxxxi/ecg_model_cpp/actions/workflows/check.yml)
 
 A submodule of [CCXXXI/ecg_monitor](https://github.com/CCXXXI/ecg_monitor).
+
+This is a C++ implementation of [CCXXXI/ecg_model_py](https://github.com/CCXXXI/ecg_model_py).
