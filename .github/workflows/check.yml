@@ -5,7 +5,7 @@ on:
   pull_request:
 
 jobs:
-  test:
+  coverage:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -26,5 +26,6 @@ jobs:
       - run: cmake -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_BUILD_TYPE=PROFILE .
       - run: cmake --build .
       - run: ./ecg_model_tests
-
-      - run: tree
+      - uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
