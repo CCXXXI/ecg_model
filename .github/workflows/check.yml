@@ -27,5 +27,7 @@ jobs:
       - run: cmake --build .
       - run: ./ecg_model_tests
 
-      # debug
-      - run: ls
+      # upload all files for debug
+      - uses: actions/upload-artifact@v3
+        with:
+          path: ./
