@@ -27,4 +27,4 @@ jobs:
       - run: cmake --build .
       - run: ./ecg_model_tests
 
-      - run: ls **/*.gc*
+      - run: ls **
