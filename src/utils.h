@@ -36,3 +36,8 @@ enum class Label : uint8_t {
   /// 未知 Unknown
   unknown = 10,
 };
+
+struct Beat {
+  int position;
+  Label label;
+};
