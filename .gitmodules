@@ -1,3 +1,9 @@
 [submodule "vcpkg"]
 	path = vcpkg
 	url = https://github.com/microsoft/vcpkg
+[submodule "assets/ecg_data"]
+	path = assets/ecg_data
+	url = https://github.com/CCXXXI/ecg_data.git
+[submodule "assets/ecg_models"]
+	path = assets/ecg_models
+	url = https://github.com/CCXXXI/ecg_models.git
