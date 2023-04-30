@@ -8,6 +8,8 @@
   </component>
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/assets/ecg_data" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/assets/ecg_models" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/vcpkg" vcs="Git" />
   </component>
 </project>
