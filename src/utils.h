@@ -41,3 +41,5 @@ struct Beat {
   int position;
   Label label;
 };
+
+constexpr auto fs = 240;
