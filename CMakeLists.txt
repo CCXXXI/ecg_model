@@ -19,4 +19,4 @@ target_link_libraries(ecg_model_tests "${TORCH_LIBRARIES}")
 find_package(Catch2 3 REQUIRED)
 target_link_libraries(ecg_model_tests Catch2::Catch2WithMain)
 
-file(COPY resources DESTINATION ${CMAKE_BINARY_DIR})
+file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
