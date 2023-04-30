@@ -45,3 +45,5 @@ struct Beat {
 constexpr auto fs = 240;
 
 auto set_models_path(const std::string& path) -> void;
+
+auto load_model(const std::string& filename) -> torch::jit::Module;
