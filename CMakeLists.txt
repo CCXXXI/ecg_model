@@ -9,7 +9,7 @@ set(CMAKE_CXX_FLAGS_PROFILE --coverage)
 
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fsanitize=address -fsanitize=undefined")
 
-add_executable(ecg_model_tests tests/test_forward.cpp)
+add_executable(ecg_model_tests tests/test_forward.cpp src/utils.cpp src/utils.h)
 
 set(Torch_DIR "./libtorch/share/cmake/Torch")
 find_package(Torch REQUIRED)
