@@ -24,7 +24,6 @@ find_package(Catch2 3 REQUIRED)
 target_link_libraries(ecg_model_tests Catch2::Catch2WithMain)
 
 # NumCpp
-set(NUMCPP_NO_USE_BOOST ON)
 target_include_directories(ecg_model_tests PRIVATE "./NumCpp/include/")
 
 # assets
