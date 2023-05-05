@@ -23,5 +23,8 @@ target_link_libraries(ecg_model_tests "${TORCH_LIBRARIES}")
 find_package(Catch2 3 REQUIRED)
 target_link_libraries(ecg_model_tests Catch2::Catch2WithMain)
 
+# NumCpp
+target_include_directories(ecg_model_tests PRIVATE "./NumCpp/include/")
+
 # assets
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
