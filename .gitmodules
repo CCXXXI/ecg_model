@@ -8,5 +8,5 @@
 	path = assets/ecg_models
 	url = https://github.com/CCXXXI/ecg_models.git
 [submodule "src/NumCpp"]
-	path = src/NumCpp
+	path = NumCpp
 	url = https://github.com/dpilger26/NumCpp.git
