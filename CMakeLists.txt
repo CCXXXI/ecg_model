@@ -31,7 +31,12 @@ find_package(Catch2 3 REQUIRED)
 target_link_libraries(ecg_model_tests Catch2::Catch2WithMain)
 
 # NumCpp
-target_include_directories(ecg_model_tests PRIVATE "./NumCpp/include/")
+include(FetchContent)
+FetchContent_Declare(NumCpp
+        GIT_REPOSITORY https://github.com/dpilger26/NumCpp
+        GIT_TAG Version_2.10.1)
+FetchContent_MakeAvailable(NumCpp)
+target_link_libraries(ecg_model_tests NumCpp::NumCpp)
 
 # assets
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
