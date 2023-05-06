@@ -11,7 +11,14 @@ string(APPEND CMAKE_CXX_FLAGS_PROFILE " --coverage")
 string(APPEND CMAKE_CXX_FLAGS_DEBUG " -fsanitize=address -fsanitize=undefined")
 
 # executable
-add_executable(ecg_model_tests src/utils.cpp src/utils.h tests/test_utils.cpp src/steps/get_beats.cpp src/steps/get_beats.h)
+add_executable(
+        ecg_model_tests
+        src/utils.cpp
+        src/utils.h
+        tests/test_utils.cpp
+        src/steps/get_beats.cpp
+        src/steps/get_beats.h
+)
 
 # torch
 set(Torch_DIR "./libtorch/share/cmake/Torch")
