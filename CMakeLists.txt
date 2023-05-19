@@ -15,10 +15,13 @@ add_executable(
         ecg_model_tests
         src/utils.cpp
         src/utils.h
-        tests/test_utils.cpp
         src/steps/get_beats.cpp
         src/steps/get_beats.h
-        src/steps/label_beats.cpp src/steps/label_beats.h src/steps/steps.h)
+        src/steps/label_beats.cpp
+        src/steps/label_beats.h
+        src/steps/steps.h
+        tests/test_utils.cpp
+)
 
 # torch
 set(Torch_DIR "./libtorch/share/cmake/Torch")
