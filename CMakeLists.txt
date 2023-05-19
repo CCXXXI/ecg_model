@@ -18,7 +18,7 @@ add_executable(
         tests/test_utils.cpp
         src/steps/get_beats.cpp
         src/steps/get_beats.h
-        src/steps/label_beats.cpp src/steps/label_beats.h)
+        src/steps/label_beats.cpp src/steps/label_beats.h src/steps/steps.h)
 
 # torch
 set(Torch_DIR "./libtorch/share/cmake/Torch")
