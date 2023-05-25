@@ -1,5 +1,6 @@
-//
-// Created by ccxxxi on 5/5/23.
-//
-
 #include "get_beats.h"
+
+auto get_beats(const nc::NdArray<double>& data, int ori_fs)
+    -> std::vector<Beat> {
+  // todo: implement
+}
