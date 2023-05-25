@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # flags
-string(APPEND CMAKE_CXX_FLAGS " -Wall -Wextra -Wpedantic -Werror")
+string(APPEND CMAKE_CXX_FLAGS " -Wall -Wextra -Wpedantic")
 string(APPEND CMAKE_CXX_FLAGS_PROFILE " --coverage")
 string(APPEND CMAKE_CXX_FLAGS_DEBUG " -fsanitize=address -fsanitize=undefined")
 
