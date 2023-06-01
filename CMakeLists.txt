@@ -41,5 +41,9 @@ FetchContent_Declare(NumCpp
 FetchContent_MakeAvailable(NumCpp)
 target_link_libraries(ecg_model_tests NumCpp::NumCpp)
 
+# Eigen
+find_package(Eigen3 REQUIRED)
+target_link_libraries(ecg_model_tests Eigen3::Eigen)
+
 # assets
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
