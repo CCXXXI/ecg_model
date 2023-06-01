@@ -3,6 +3,7 @@
   "name": "ecg-model",
   "dependencies": [
     "catch2",
-    "boost"
+    "boost",
+    "eigen3"
   ]
 }
