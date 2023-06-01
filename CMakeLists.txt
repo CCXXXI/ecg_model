@@ -21,6 +21,7 @@ add_executable(
         src/steps/label_beats.h
         src/steps/steps.h
         tests/test_utils.cpp
+        src/scipy/upfirdn.h
 )
 
 # torch
