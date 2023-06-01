@@ -40,9 +40,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <stdexcept>
 #include <vector>
 
-namespace ecg {
-namespace data_processing {
-namespace resample {
+namespace scipy {
 using namespace std;
 template <class S1, class S2, class C>
 class Resampler {
@@ -232,8 +230,8 @@ the original version of this function.
   results.resize(resultsCount);
 
   // run filtering
-  int numSamplesComputed = theResampler.apply(inputPadded, inLength + padding,
-                                              &results[0], resultsCount);
+  theResampler.apply(inputPadded, inLength + padding, &results[0],
+                     resultsCount);
   delete[] inputPadded;
 }
 
@@ -251,6 +249,4 @@ pointer/count pairs.
                      filter.size(), results);
 }
 
-}  // namespace resample
-}  // namespace data_processing
-}  // namespace ecg
+}  // namespace scipy
