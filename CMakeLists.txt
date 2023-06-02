@@ -22,6 +22,7 @@ add_executable(
         src/steps/steps.h
         tests/test_utils.cpp
         src/scipy/upfirdn.h
+        src/scipy/resample.h
 )
 
 # torch
