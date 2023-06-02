@@ -17,13 +17,14 @@
 #include <vector>
 
 #include "upfirdn.h"
-namespace scipy {
-
-using std::vector;
 
 namespace {
 const double PI = acos(-1);
 }
+
+namespace scipy {
+
+using std::vector;
 
 template <typename T>
 T sinc(T x) {
