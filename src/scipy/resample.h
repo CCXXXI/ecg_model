@@ -17,9 +17,7 @@
 #include <vector>
 
 #include "upfirdn.h"
-namespace ecg {
-namespace data_processing {
-namespace resample {
+namespace scipy {
 
 using std::vector;
 
@@ -184,6 +182,4 @@ void resample(int upFactor, int downFactor, vector<T>& inputSignal,
   }
 }
 
-}  // namespace resample
-}  // namespace data_processing
-}  // namespace ecg
+}  // namespace scipy
