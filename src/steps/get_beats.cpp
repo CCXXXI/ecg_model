@@ -87,5 +87,43 @@ auto u_net_r_peak(const nc::NdArray<bool>& is_qrs_origin) -> std::vector<int> {
 
 auto get_beats(const nc::NdArray<double>& data, const int ori_fs)
     -> std::vector<Beat> {
-  // todo: implement
+  auto data_vector = data.toStlVector();
+  const auto n = static_cast<int>(data_vector.size());
+  auto data_resampled_vector = std::vector<double>{};
+  scipy::resample<double>(n * fs / ori_fs, n, data_vector,
+                          data_resampled_vector);
+  auto data_resampled = nc::NdArray<double>(data_resampled_vector);
+  static constexpr auto len_u_net = 10 * 60 * fs;
+
+  const auto len_data = static_cast<int>(data_resampled_vector.size());
+  auto beats = std::vector<Beat>{};
+  auto cur_s = 0;
+  auto now_s = 0;
+  while (cur_s < len_data) {
+    if (cur_s + len_u_net <= len_data) {
+      now_s = cur_s + len_u_net;
+    } else {
+      break;
+    }
+    const auto is_qrs = u_net_peak(
+        data_resampled(data_resampled.rSlice(), nc::Slice(cur_s, now_s)));
+
+    const auto r_list = u_net_r_peak(is_qrs);
+
+    auto append_start = static_cast<int>(0.5 * 60 * fs);
+    static constexpr auto append_end = static_cast<int>(9.5 * 60 * fs);
+    if (cur_s == 0) {
+      append_start = 0;
+    }
+
+    for (const auto& beat : r_list) {
+      if (append_start < beat && beat <= append_end) {
+        beats.push_back(Beat(beat + cur_s, Label::unknown));
+      }
+    }
+
+    cur_s += 9 * 60 * fs;
+  }
+
+  return beats;
 }
