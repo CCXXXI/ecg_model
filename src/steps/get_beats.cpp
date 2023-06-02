@@ -49,8 +49,39 @@ auto u_net_peak(const nc::NdArray<double>& data) -> nc::NdArray<bool> {
   return is_qrs;
 }
 
-auto u_net_r_peak(const nc::NdArray<bool>& is_qrs) -> std::vector<int> {
-  // todo: implement
+auto u_net_r_peak(const nc::NdArray<bool>& is_qrs_origin) -> std::vector<int> {
+  const auto origin_len = static_cast<int>(is_qrs_origin.size());
+
+  auto is_qrs = is_qrs_origin;
+  is_qrs = nc::insert(is_qrs, origin_len, false);
+  is_qrs = nc::insert(is_qrs, 0, false);
+
+  auto y = nc::zeros_like<bool>(is_qrs);
+  for (auto pre = 0; pre < origin_len; ++pre) {
+    const auto cur = pre + 1;
+    const auto nxt = cur + 1;
+    if (is_qrs[cur] && (is_qrs[pre] || is_qrs[nxt])) {
+      y[pre] = !is_qrs[pre] || !is_qrs[nxt];
+    }
+  }
+
+  auto start = 0;
+  auto flag = false;
+  auto r_list = std::vector<int>{};
+  for (auto i = 0; i < origin_len; ++i) {
+    if (!y[i]) {
+      continue;
+    }
+    if (flag) {
+      flag = false;
+      r_list.push_back(start + static_cast<int>(std::floor((i - start) / 2)));
+    } else {
+      flag = true;
+      start = i;
+    }
+  }
+
+  return r_list;
 }
 }  // namespace
 
