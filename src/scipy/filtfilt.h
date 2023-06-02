@@ -2,12 +2,11 @@
 // modified to fit python scipy.signal.filtfilt() and add python
 // signal.buffer(1, wn, btype = 'high', ftype = 'ba')
 
+#include <Eigen/Dense>
 #include <algorithm>
 #include <cmath>
 #include <exception>
 #include <vector>
-
-#include "Eigen/Dense"
 namespace scipy {
 typedef std::vector<int> vectori;
 typedef std::vector<double> vectord;
