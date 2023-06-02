@@ -23,6 +23,7 @@ add_executable(
         tests/test_utils.cpp
         src/scipy/upfirdn.h
         src/scipy/resample.h
+        src/scipy/filtfilt.h
 )
 
 # torch
