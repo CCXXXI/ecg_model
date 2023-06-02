@@ -177,8 +177,8 @@ void filtfilt(vectord B, vectord A, const vectord& X, vectord& Y) {
 void highpassbuffer(double band_Hz, int Hz, vectord& a_coeff,
                     vectord& b_coeff) {
   double w = 4 * tan(band_Hz * PI / Hz);
-  a_coeff.swap(vectord{1.0, -(4 - w) / (4 + w)});
-  b_coeff.swap(vectord{4 / (4 + w), -4 / (4 + w)});
+  a_coeff = vectord{1.0, -(4 - w) / (4 + w)};
+  b_coeff = vectord{4 / (4 + w), -4 / (4 + w)};
 }
 }  // namespace filtfilt
 }  // namespace data_processing
