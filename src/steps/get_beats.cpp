@@ -1,7 +1,6 @@
 #include "get_beats.h"
 
 #include "../scipy/scipy.h"
-#include "../utils.h"
 
 namespace {
 auto output_sliding_voting_v2(const nc::NdArray<int>& ori_output)
