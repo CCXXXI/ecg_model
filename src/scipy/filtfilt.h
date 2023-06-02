@@ -8,9 +8,7 @@
 #include <vector>
 
 #include "Eigen/Dense"
-namespace ecg {
-namespace data_processing {
-namespace filtfilt {
+namespace scipy {
 typedef std::vector<int> vectori;
 typedef std::vector<double> vectord;
 
@@ -180,6 +178,4 @@ void highpassbuffer(double band_Hz, int Hz, vectord& a_coeff,
   a_coeff = vectord{1.0, -(4 - w) / (4 + w)};
   b_coeff = vectord{4 / (4 + w), -4 / (4 + w)};
 }
-}  // namespace filtfilt
-}  // namespace data_processing
-}  // namespace ecg
+}  // namespace scipy
