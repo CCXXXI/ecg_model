@@ -11,7 +11,9 @@ namespace scipy {
 typedef std::vector<int> vectori;
 typedef std::vector<double> vectord;
 
+namespace {
 const double PI = acos(-1);
+}
 
 void add_index_range(vectori& indices, int beg, int end, int inc = 1) {
   for (int i = beg; i <= end; i += inc) indices.push_back(i);
