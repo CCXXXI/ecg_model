@@ -21,9 +21,7 @@ namespace scipy {
 
 using std::vector;
 
-namespace {
 const double PI = acos(-1);
-}
 
 template <typename T>
 T sinc(T x) {
