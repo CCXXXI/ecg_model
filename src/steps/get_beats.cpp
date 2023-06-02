@@ -1,5 +1,8 @@
 #include "get_beats.h"
 
+#include "../scipy/scipy.h"
+#include "../utils.h"
+
 namespace {
 auto output_sliding_voting_v2(const nc::NdArray<int>& ori_output)
     -> nc::NdArray<int> {
@@ -27,7 +30,23 @@ auto output_sliding_voting_v2(const nc::NdArray<int>& ori_output)
 }
 
 auto u_net_peak(const nc::NdArray<double>& data) -> nc::NdArray<bool> {
-  // todo: implement
+  auto data_vector = data.toStlVector();
+  static const auto b = std::vector<double>{0.99349748, -0.99349748};
+  static const auto a = std::vector<double>{1.0, -0.98699496};
+  auto x_vector = std::vector<double>{};
+  scipy::filtfilt(b, a, data_vector, x_vector);
+
+  auto x = nc::NdArray<double>(x_vector);
+  x = (x - nc::mean(x)) / nc::stdev(x);
+  auto x_tensor = torch::from_blob(x.data(), {1, 1, x.size()});
+
+  auto model = load_model("u_net.pt");
+  auto pred = model.forward({x_tensor}).toTensor()[0].argmax(0);
+  auto pred_array = nc::NdArray<int>(pred.data_ptr<int>(), pred.size(0));
+  auto output = output_sliding_voting_v2(pred_array);
+
+  auto is_qrs = output == 1;
+  return is_qrs;
 }
 
 auto u_net_r_peak(const nc::NdArray<bool>& is_qrs) -> std::vector<int> {
