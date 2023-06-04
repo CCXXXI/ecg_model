@@ -28,14 +28,11 @@ auto output_sliding_voting_v2(const nc::NdArray<int>& ori_output)
   return output;
 }
 
-auto u_net_peak(const nc::NdArray<double>& data) -> nc::NdArray<bool> {
-  auto data_vector = data.toStlVector();
-  static const auto b = std::vector<double>{0.99349748, -0.99349748};
-  static const auto a = std::vector<double>{1.0, -0.98699496};
-  auto x_vector = std::vector<double>{};
-  scipy::filtfilt(b, a, data_vector, x_vector);
+auto bsw(const nc::NdArray<double>& data) -> nc::NdArray<double>;
 
-  auto x = nc::NdArray<double>(x_vector);
+auto u_net_peak(const nc::NdArray<double>& data) -> nc::NdArray<bool> {
+  auto x = bsw(data);
+
   x = (x - nc::mean(x)) / nc::stdev(x);
   auto x_tensor = torch::from_blob(x.data(), {1, 1, x.size()});
 
@@ -46,6 +43,16 @@ auto u_net_peak(const nc::NdArray<double>& data) -> nc::NdArray<bool> {
 
   auto is_qrs = output == 1;
   return is_qrs;
+}
+
+auto bsw(const nc::NdArray<double>& data) -> nc::NdArray<double> {
+  auto data_vector = data.toStlVector();
+  static const auto b = std::vector<double>{0.99349748, -0.99349748};
+  static const auto a = std::vector<double>{1.0, -0.98699496};
+  auto x_vector = std::vector<double>{};
+  scipy::filtfilt(b, a, data_vector, x_vector);
+  auto x = nc::NdArray<double>(x_vector);
+  return x;
 }
 
 auto u_net_r_peak(const nc::NdArray<bool>& is_qrs_origin) -> std::vector<int> {
