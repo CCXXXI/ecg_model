@@ -11,19 +11,19 @@ namespace scipy {
 using vectori = std::vector<int>;
 using vectord = std::vector<double>;
 
-void add_index_range(vectori& indices, int beg, int end, int inc = 1) {
+inline void add_index_range(vectori& indices, int beg, int end, int inc = 1) {
   for (int i = beg; i <= end; i += inc) indices.push_back(i);
 }
 
-void add_index_const(vectori& indices, int value, size_t numel) {
+inline void add_index_const(vectori& indices, int value, size_t numel) {
   while (numel--) indices.push_back(value);
 }
 
-void append_vector(vectord& vec, const vectord& tail) {
+inline void append_vector(vectord& vec, const vectord& tail) {
   vec.insert(vec.end(), tail.begin(), tail.end());
 }
 
-vectord subvector_reverse(const vectord& vec, int idx_end, int idx_start) {
+inline vectord subvector_reverse(const vectord& vec, int idx_end, int idx_start) {
   vectord result(&vec[idx_start], &vec[idx_end + 1]);
   std::reverse(result.begin(), result.end());
   return result;
@@ -33,9 +33,9 @@ inline int max_val(const vectori& vec) {
   return std::max_element(vec.begin(), vec.end())[0];
 }
 
-void filtfilt(vectord B, vectord A, const vectord& X, vectord& Y);
+inline void filtfilt(vectord B, vectord A, const vectord& X, vectord& Y);
 
-void filter(vectord B, vectord A, const vectord& X, vectord& Y, vectord& Zi) {
+inline void filter(vectord B, vectord A, const vectord& X, vectord& Y, vectord& Zi) {
   if (A.empty())
     throw std::domain_error("The feedback filter coefficients are empty.");
   if (std::all_of(A.begin(), A.end(), [](double coef) { return coef == 0; }))
@@ -80,7 +80,7 @@ void filter(vectord B, vectord A, const vectord& X, vectord& Y, vectord& Zi) {
 }
 
 // this function has been modified to fit python scipy.signal.filtfilt()
-void filtfilt(vectord B, vectord A, const vectord& X, vectord& Y) {
+inline void filtfilt(vectord B, vectord A, const vectord& X, vectord& Y) {
   int len = X.size();  // length of input
   int na = A.size();
   int nb = B.size();
