@@ -8,8 +8,8 @@
 #include <exception>
 #include <vector>
 namespace scipy {
-typedef std::vector<int> vectori;
-typedef std::vector<double> vectord;
+using vectori = std::vector<int>;
+using vectord = std::vector<double>;
 
 void add_index_range(vectori& indices, int beg, int end, int inc = 1) {
   for (int i = beg; i <= end; i += inc) indices.push_back(i);
