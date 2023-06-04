@@ -2,6 +2,8 @@
 
 #include <torch/torch.h>
 
+#include <NumCpp.hpp>
+
 enum class Label : uint8_t {
   /// 窦性心律 Sinus rhythm
   sinus_rhythm = 0,
@@ -47,3 +49,5 @@ constexpr auto fs = 240;
 auto set_models_path(const std::string& path) -> void;
 
 auto load_model(const std::string& filename) -> torch::jit::Module;
+
+auto bsw(const nc::NdArray<double>& data) -> nc::NdArray<double>;
