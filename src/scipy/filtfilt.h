@@ -169,7 +169,7 @@ void filtfilt(vectord B, vectord A, const vectord& X, vectord& Y) {
 
 // calculate the b, a coeff like python scipy.signal.buffer(1, wn, btype='high',
 // ftype='ba') wn = 0.5*band_Hz/Hz
-void highpassbuffer(double band_Hz, int Hz, vectord& a_coeff,
+inline void highpassbuffer(double band_Hz, int Hz, vectord& a_coeff,
                     vectord& b_coeff) {
   double w = 4 * tan(band_Hz * acos(-1) / Hz);
   a_coeff = vectord{1.0, -(4 - w) / (4 + w)};
