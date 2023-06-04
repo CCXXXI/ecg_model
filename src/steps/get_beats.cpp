@@ -92,7 +92,7 @@ auto get_beats(const nc::NdArray<double>& data, const int ori_fs)
   const auto len_data = static_cast<int>(data_resampled_vector.size());
   auto beats = std::vector<Beat>{};
   auto cur_s = 0;
-  auto now_s = 0;
+  int now_s;
   while (cur_s < len_data) {
     if (cur_s + len_u_net <= len_data) {
       now_s = cur_s + len_u_net;
