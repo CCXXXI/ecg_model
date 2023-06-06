@@ -32,7 +32,7 @@ auto u_net_peak(const nc::NdArray<double>& data) -> nc::NdArray<bool> {
   auto x = bsw(data);
 
   x = (x - nc::mean(x)) / nc::stdev(x);
-  auto x_tensor = torch::from_blob(x.data(), {1, 1, x.size()});
+  auto x_tensor = torch::from_blob(x.data(), {1, 1, x.size()}, torch::kDouble);
 
   auto model = load_model("u_net.pt");
   auto pred = model.forward({x_tensor}).toTensor()[0].argmax(0);
