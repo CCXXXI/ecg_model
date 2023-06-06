@@ -43,6 +43,10 @@ enum class Label : uint8_t {
 struct Beat {
   int position;
   Label label;
+
+  bool operator==(const Beat& other) const {
+    return position == other.position && label == other.label;
+  }
 };
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Beat, position, label);
 
