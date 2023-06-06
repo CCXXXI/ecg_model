@@ -1,8 +1,9 @@
-//
-// Created by ccxxxi on 6/6/23.
-//
+#pragma once
 
-#ifndef ECG_MODEL_MAIN_H
-#define ECG_MODEL_MAIN_H
+#include <NumCpp.hpp>
 
-#endif  // ECG_MODEL_MAIN_H
+#include "utils.h"
+
+auto infer(const nc::NdArray<double>& data, int ori_fs) -> std::vector<Beat>;
+
+auto get_input() -> nc::NdArray<double>;
