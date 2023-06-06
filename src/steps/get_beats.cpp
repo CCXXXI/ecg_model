@@ -35,7 +35,7 @@ auto u_net_peak(const nc::NdArray<double>& data) -> nc::NdArray<bool> {
   auto x_tensor = torch::from_blob(x.data(), {1, 1, x.size()}, torch::kDouble);
 
   auto model = load_model("u_net.pt");
-  auto pred = model.forward({x_tensor}).toTensor()[0].argmax(0);
+  auto pred = model.forward({x_tensor}).toTensor()[0].argmax(0).to(torch::kInt);
   auto pred_array = nc::NdArray<int>(pred.data_ptr<int>(), pred.size(0));
   auto output = output_sliding_voting_v2(pred_array);
 
