@@ -3,6 +3,7 @@
 #include <torch/torch.h>
 
 #include <NumCpp.hpp>
+#include <nlohmann/json.hpp>
 
 enum class Label : uint8_t {
   /// 窦性心律 Sinus rhythm
@@ -43,6 +44,7 @@ struct Beat {
   int position;
   Label label;
 };
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Beat, position, label);
 
 constexpr auto fs = 240;
 
