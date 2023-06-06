@@ -19,6 +19,9 @@ TEST_CASE("test_infer", "[main]") {
   REQUIRE(actual.size() == expected.size());
   const auto n = static_cast<int>(actual.size());
   for (auto i = 0; i < n; ++i) {
-    REQUIRE(actual[i] == expected[i].get<Beat>());
+    auto a = actual[i];
+    auto e = expected[i];
+    REQUIRE(a.label == e["label"]);
+    REQUIRE(a.position * 1000 / fs == e["millisecondsSinceStart"]);
   }
 }
