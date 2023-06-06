@@ -27,6 +27,7 @@ add_executable(
         src/scipy/scipy.h
         src/main.cpp
         src/main.h
+        tests/test_main.cpp
 )
 
 # torch
