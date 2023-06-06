@@ -1,22 +1,60 @@
-cmake_minimum_required(VERSION 3.24)
+cmake_minimum_required(VERSION 3.25)
 project(ecg_model)
 
+# standard
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic -Werror")
 
-set(CMAKE_CXX_FLAGS_PROFILE --coverage)
+# flags
+string(APPEND CMAKE_CXX_FLAGS " -Wall -Wextra -Wpedantic")
+string(APPEND CMAKE_CXX_FLAGS_PROFILE " --coverage")
+string(APPEND CMAKE_CXX_FLAGS_DEBUG " -fsanitize=address -fsanitize=undefined")
 
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fsanitize=address -fsanitize=undefined")
+# executable
+add_executable(
+        ecg_model_tests
+        src/utils.cpp
+        src/utils.h
+        src/steps/get_beats.cpp
+        src/steps/get_beats.h
+        src/steps/label_beats.cpp
+        src/steps/label_beats.h
+        src/steps/steps.h
+        tests/test_utils.cpp
+        src/scipy/upfirdn.h
+        src/scipy/resample.h
+        src/scipy/filtfilt.h
+        src/scipy/scipy.h
+        src/main.cpp
+        src/main.h
+        tests/test_main.cpp
+)
 
-add_executable(ecg_model_tests tests/test_forward.cpp)
-
+# torch
 set(Torch_DIR "./libtorch/share/cmake/Torch")
 find_package(Torch REQUIRED)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TORCH_CXX_FLAGS}")
+string(APPEND CMAKE_CXX_FLAGS " ${TORCH_CXX_FLAGS}")
 target_link_libraries(ecg_model_tests "${TORCH_LIBRARIES}")
 
+# catch2
 find_package(Catch2 3 REQUIRED)
 target_link_libraries(ecg_model_tests Catch2::Catch2WithMain)
 
-file(COPY resources DESTINATION ${CMAKE_BINARY_DIR})
+# NumCpp
+include(FetchContent)
+FetchContent_Declare(NumCpp
+        GIT_REPOSITORY https://github.com/dpilger26/NumCpp
+        GIT_TAG Version_2.10.1)
+FetchContent_MakeAvailable(NumCpp)
+target_link_libraries(ecg_model_tests NumCpp::NumCpp)
+
+# Eigen
+find_package(Eigen3 REQUIRED)
+target_link_libraries(ecg_model_tests Eigen3::Eigen)
+
+# nlohmann::json
+find_package(nlohmann_json CONFIG REQUIRED)
+target_link_libraries(ecg_model_tests nlohmann_json::nlohmann_json)
+
+# assets
+file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
