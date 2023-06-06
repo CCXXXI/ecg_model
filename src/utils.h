@@ -44,9 +44,7 @@ struct Beat {
   int position;
   Label label;
 
-  bool operator==(const Beat& other) const {
-    return position == other.position && label == other.label;
-  }
+  bool operator==(const Beat&) const = default;
 };
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Beat, position, label);
 
