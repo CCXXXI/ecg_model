@@ -11,7 +11,7 @@ auto transform(const nc::NdArray<double>& sig) -> torch::Tensor {
   auto sig_resampled_vector = std::vector<double>{};
   scipy::resample<double>(360, n, sig_vector, sig_resampled_vector);
   auto sig_resampled = nc::NdArray<double>(sig_resampled_vector);
-  auto sig_tensor = torch::from_blob(sig_resampled.data(), {1, 360});
+  auto sig_tensor = torch::from_blob(sig_resampled.data(), {1, 360}, torch::kDouble);
   return sig_tensor;
 }
 }  // namespace
