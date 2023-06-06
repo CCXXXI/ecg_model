@@ -25,6 +25,8 @@ add_executable(
         src/scipy/resample.h
         src/scipy/filtfilt.h
         src/scipy/scipy.h
+        src/main.cpp
+        src/main.h
 )
 
 # torch
