@@ -54,7 +54,7 @@ target_link_libraries(ecg_model_tests Eigen3::Eigen)
 
 # nlohmann::json
 find_package(nlohmann_json CONFIG REQUIRED)
-target_link_libraries(ecg_model_tests PRIVATE nlohmann_json::nlohmann_json)
+target_link_libraries(ecg_model_tests nlohmann_json::nlohmann_json)
 
 # assets
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
