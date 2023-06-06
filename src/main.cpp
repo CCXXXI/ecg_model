@@ -13,7 +13,7 @@ auto infer(const nc::NdArray<double>& data, const int ori_fs)
 }
 
 auto get_input() -> nc::NdArray<double> {
-  std::ifstream in("../assets/ecg_data/assets/data.json");
+  std::ifstream in("./assets/ecg_data/assets/data.json");
   auto points = nlohmann::json::parse(in);
 
   auto n = static_cast<int>(points.size());
